@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours Complet : NoSQL, MongoDB et la Stack ELK</title>
+    <title>Cours Complet : NoSQL, MongoDB et Stack ELK – Résumé + TP</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,16 +22,23 @@
         }
         h1 {
             color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 3px solid #3498db;
             padding-bottom: 10px;
+            text-align: center;
         }
         h2 {
             color: #2980b9;
-            border-bottom: 1px solid #3498db;
-            padding-bottom: 5px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-top: 30px;
         }
         h3 {
             color: #16a085;
+            margin-top: 20px;
+        }
+        h4 {
+            color: #8e44ad;
+            margin-top: 15px;
         }
         pre {
             background-color: #f4f4f4;
@@ -39,12 +46,20 @@
             border-radius: 5px;
             overflow-x: auto;
             border-left: 4px solid #3498db;
+            font-family: 'Courier New', monospace;
         }
         code {
             font-family: 'Courier New', monospace;
             background-color: #f4f4f4;
             padding: 2px 5px;
             border-radius: 3px;
+        }
+        .resume-box {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-left: 5px solid #16a085;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
         }
         .question {
             background-color: #e8f4f8;
@@ -57,7 +72,7 @@
             background-color: #e8f8e8;
             padding: 15px;
             border-left: 4px solid #2ecc71;
-            margin: 10px 0;
+            margin: 10px 0 20px 0;
             border-radius: 0 5px 5px 0;
         }
         .important {
@@ -81,13 +96,14 @@
         table, th, td {
             border: 1px solid #ddd;
         }
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
         th {
             background-color: #3498db;
             color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2;
@@ -108,1121 +124,1225 @@
             margin: 15px 0;
             font-style: italic;
         }
+        #toc {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        #toc ul {
+            margin-left: 20px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #toc li {
+            margin: 5px 0;
+        }
+        #toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        #toc a:hover {
+            text-decoration: underline;
+        }
+        .back-to-top {
+            display: block;
+            text-align: right;
+            margin: 20px 0;
+            color: #3498db;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Cours Complet : NoSQL, MongoDB et la Stack ELK</h1>
+        <h1>Cours Complet : NoSQL, MongoDB et Stack ELK</h1>
+        <p style="text-align: center; font-style: italic;">Inclut le résumé des cours, les détails techniques et les réponses aux TP</p>
 
-        <h2>Table des Matières</h2>
-        <ol>
-            <li><a href="#nosql">Introduction à NoSQL</a></li>
-            <li><a href="#mongodb">MongoDB</a>
-                <ol>
-                    <li><a href="#mongodb-intro">Introduction à MongoDB</a></li>
-                    <li><a href="#mongodb-tp">TP MongoDB</a></li>
-                </ol>
-            </li>
-            <li><a href="#elk">Stack ELK</a>
-                <ol>
-                    <li><a href="#elk-intro">Introduction à la Stack ELK</a></li>
-                    <li><a href="#elk-tp">TP ELK</a></li>
-                </ol>
-            </li>
-            <li><a href="#questions">Réponses aux Questions des TP</a></li>
-        </ol>
+        <!-- Table des Matières -->
+        <div id="toc">
+            <h2>Table des Matières</h2>
+            <ul>
+                <li><a href="#resume">📌 Résumé des Cours</a></li>
+                <li><a href="#nosql">1. NoSQL : Fondamentaux</a></li>
+                <li><a href="#mongodb">2. MongoDB
+                    <ul>
+                        <li><a href="#mongodb-intro">2.1. Introduction et Concepts</a></li>
+                        <li><a href="#mongodb-tp">2.2. TP MongoDB avec Réponses</a></li>
+                    </ul>
+                </li>
+                <li><a href="#elk">3. Stack ELK
+                    <ul>
+                        <li><a href="#elk-intro">3.1. Introduction et Composants</a></li>
+                        <li><a href="#elk-tp">3.2. TP ELK avec Réponses</a></li>
+                    </ul>
+                </li>
+                <li><a href="#questions">4. Réponses aux Questions des TP</a></li>
+            </ul>
+        </div>
 
-        <hr>
+        <!-- Résumé des Cours -->
+        <section id="resume">
+            <h2>📌 Résumé des Cours</h2>
+
+            <div class="resume-box">
+                <h3>1. NoSQL : En Bref</h3>
+                <p><strong>Définition</strong> : Bases de données <strong>non relationnelles</strong>, optimisées pour la <strong>scalabilité horizontale</strong>, la <strong>flexibilité des schémas</strong> et la gestion de <strong>grands volumes de données non structurées</strong>.</p>
+
+                <h4>Types de NoSQL</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Exemples</th>
+                            <th>Cas d'usage</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Clé-Valeur</strong></td>
+                            <td>Redis, DynamoDB</td>
+                            <td>Cache, sessions, métadonnées</td>
+                            <td>Simplicité, performance</td>
+                            <td>Limité aux requêtes par clé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documents</strong></td>
+                            <td>MongoDB, CouchDB</td>
+                            <td>Applications web, catalogues</td>
+                            <td>Flexibilité, requêtes riches</td>
+                            <td>Moins adapté aux jointures complexes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Colonnes</strong></td>
+                            <td>Cassandra, HBase</td>
+                            <td>Big Data, séries temporelles</td>
+                            <td>Scalabilité massive, écritures rapides</td>
+                            <td>Requêtes complexes limitées</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Graphes</strong></td>
+                            <td>Neo4j, Amazon Neptune</td>
+                            <td>Réseaux sociaux, recommandations</td>
+                            <td>Requêtes relationnelles puissantes</td>
+                            <td>Performance limitée pour les grands graphes</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Théorème CAP</h4>
+                <p>Un système distribué ne peut garantir simultanément que <strong>2 des 3 propriétés</strong> :
+                <ul>
+                    <li><strong>C</strong>ohérence (tous les nœuds voient les mêmes données)</li>
+                    <li><strong>A</strong>vailability (chaque requête reçoit une réponse)</li>
+                    <li><strong>P</strong>artition tolerance (le système fonctionne malgré des pannes réseau)</li>
+                </ul>
+                <p><strong>Exemple</strong> : MongoDB privilégie <strong>CP</strong> (cohérence + tolérance aux pannes), tandis que Cassandra privilégie <strong>AP</strong> (disponibilité + tolérance aux pannes).</p>
+
+                <h4>BASE vs ACID</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ACID (SQL)</th>
+                            <th>BASE (NoSQL)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomicité, Cohérence, Isolation, Durabilité</td>
+                            <td>Basically Available, Soft state, Eventual consistency</td>
+                        </tr>
+                        <tr>
+                            <td>Transactions strictes, cohérence immédiate</td>
+                            <td>Disponibilité prioritaire, cohérence eventualle</td>
+                        </tr>
+                        <tr>
+                            <td>Idéal pour les données structurées et critiques</td>
+                            <td>Idéal pour la scalabilité et la flexibilité</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="resume-box">
+                <h3>2. MongoDB : Résumé</h3>
+                <p><strong>Définition</strong> : Base de données <strong>orientée documents</strong> (JSON/BSON), avec <strong>scalabilité horizontale</strong>, <strong>réplication</strong> et <strong>sharding</strong>.</p>
+
+                <h4>Concepts Clés</h4>
+                <ul>
+                    <li><strong>Document</strong> : Unité de stockage (ex: <code>{ "nom": "Alice", "âge": 30 }</code>).</li>
+                    <li><strong>Collection</strong> : Ensemble de documents (équivalent d'une table en SQL).</li>
+                    <li><strong>Index</strong> : Améliore les performances des requêtes (ex: <code>db.collection.createIndex({ "age": 1 })</code>).</li>
+                    <li><strong>Replica Set</strong> : Groupe de serveurs pour la haute disponibilité (1 primaire + N secondaires).</li>
+                    <li><strong>Sharding</strong> : Partitionnement horizontal pour répartir les données sur plusieurs machines.</li>
+                </ul>
+
+                <h4>Opérations CRUD</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Opération</th>
+                            <th>Commande MongoDB</th>
+                            <th>Équivalent SQL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Create</td>
+                            <td><code>db.collection.insertOne({...})</code></td>
+                            <td><code>INSERT INTO table VALUES (...)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Read</td>
+                            <td><code>db.collection.find({ "age": { $gt: 25 } })</code></td>
+                            <td><code>SELECT * FROM table WHERE age > 25</code></td>
+                        </tr>
+                        <tr>
+                            <td>Update</td>
+                            <td><code>db.collection.updateOne({ "nom": "Alice" }, { $set: { "âge": 31 } })</code></td>
+                            <td><code>UPDATE table SET age=31 WHERE name='Alice'</code></td>
+                        </tr>
+                        <tr>
+                            <td>Delete</td>
+                            <td><code>db.collection.deleteOne({ "nom": "Alice" })</code></td>
+                            <td><code>DELETE FROM table WHERE name='Alice'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Agrégations</h4>
+                <p>Pipeline d'opérations pour traiter et analyser les données :</p>
+                <pre>
+db.orders.aggregate([
+  { $match: { status: "completed" } },  // Filtre
+  { $group: { _id: "$client", total: { $sum: "$montant" } } },  // Groupe et somme
+  { $sort: { total: -1 } }  // Tri décroissant
+])
+                </pre>
+            </div>
+
+            <div class="resume-box">
+                <h3>3. Stack ELK : Résumé</h3>
+                <p><strong>Définition</strong> : Suite d'outils pour la <strong>collecte</strong>, le <strong>traitement</strong>, le <strong>stockage</strong> et la <strong>visualisation</strong> de données (logs, métriques, etc.).</p>
+
+                <h4>Composants</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Outil</th>
+                            <th>Rôle</th>
+                            <th>Exemple d'usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Elasticsearch</strong></td>
+                            <td>Moteur de recherche/distribué pour stocker et indexer les données.</td>
+                            <td>Recherche full-text, analyse de logs.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Logstash</strong></td>
+                            <td>Collecte, transforme et transporte les données (ETL).</td>
+                            <td>Parsing de logs Apache, enrichissement des données.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kibana</strong></td>
+                            <td>Visualisation et exploration des données via des dashboards.</td>
+                            <td>Création de graphiques, alertes, cartes géographiques.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beats</strong></td>
+                            <td>Agents légers pour collecter des données (logs, métriques, etc.).</td>
+                            <td>Filebeat pour les logs, Metricbeat pour les métriques système.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Architecture Typique</h4>
+                <p>
+                    <strong>Filebeat</strong> (sur les serveurs) →
+                    <strong>Logstash</strong> (traitement) →
+                    <strong>Elasticsearch</strong> (stockage/indexation) →
+                    <strong>Kibana</strong> (visualisation).
+                </p>
+
+                <h4>Cas d'usage</h4>
+                <ul>
+                    <li>Analyse de logs (Apache, Nginx, applications).</li>
+                    <li>Monitoring des performances (métriques système, APM).</li>
+                    <li>Recherche full-text (documents, produits, utilisateurs).</li>
+                    <li>Sécurité (détection d'intrusions via les logs).</li>
+                </ul>
+            </div>
+        </section>
 
         <!-- Section NoSQL -->
         <section id="nosql">
-            <h2>1. Introduction à NoSQL</h2>
+            <h2>1. NoSQL : Fondamentaux</h2>
 
-            <h3>1.1. Définition et Concepts Clés</h3>
+            <h3>1.1 Pourquoi NoSQL ?</h3>
             <p>
-                NoSQL (Not Only SQL) désigne une famille de systèmes de gestion de bases de données qui ne reposent pas sur le modèle relationnel traditionnel.
-                Ces bases de données sont conçues pour gérer des volumes massifs de données non structurées ou semi-structurées, avec une grande flexibilité et une scalabilité horizontale.
+                Les bases de données NoSQL ont émergé en réponse aux limites des bases relationnelles (SQL) pour :
             </p>
+            <ul>
+                <li><strong>Scalabilité</strong> : Difficulté à scalaire horizontalement avec SQL (nécessite des solutions coûteuses comme le sharding manuel).</li>
+                <li><strong>Flexibilité</strong> : Schéma fixe en SQL, difficile à modifier pour des données non structurées (JSON, XML).</li>
+                <li><strong>Performance</strong> : Les jointures complexes en SQL ralentissent les requêtes sur de grands volumes.</li>
+                <li><strong>Big Data</strong> : Besoin de gérer des <strong>4V</strong> : Volume, Vélocité, Variété, Véracité.</li>
+            </ul>
 
             <div class="important">
-                <strong>Caractéristiques principales de NoSQL :</strong>
-                <ul>
-                    <li><strong>Flexibilité du schéma</strong> : Pas de schéma fixe, les données peuvent être ajoutées ou modifiées sans contrainte.</li>
-                    <li><strong>Scalabilité horizontale</strong> : Possibilité d'ajouter des nœuds pour gérer des charges accrues.</li>
-                    <li><strong>Haute disponibilité</strong> : Conçu pour fonctionner même en cas de panne de certains nœuds.</li>
-                    <li><strong>Performance</strong> : Optimisé pour des lectures/écritures rapides sur de grands volumes de données.</li>
-                </ul>
+                <h4>1.2 Les 4 Types de NoSQL</h4>
+                <ol>
+                    <li><strong>Clé-Valeur</strong> :
+                        <ul>
+                            <li>Stockage sous forme de paires clé-valeur (ex: <code>{ "user123": "{'nom': 'Alice', 'âge': 30}" }</code>).</li>
+                            <li><strong>Avantages</strong> : Simplicité, performance extrême pour les lectures/écritures.</li>
+                            <li><strong>Cas d'usage</strong> : Cache (Redis), sessions utilisateurs, métadonnées.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Documents</strong> :
+                        <ul>
+                            <li>Stockage de documents JSON/BSON (ex: MongoDB).</li>
+                            <li><strong>Avantages</strong> : Flexibilité du schéma, requêtes riches, embarquement de données liées.</li>
+                            <li><strong>Cas d'usage</strong> : Applications web, catalogues produits, profils utilisateurs.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Colonnes (Wide-Column)</strong> :
+                        <ul>
+                            <li>Stockage par colonnes plutôt que par lignes (ex: Cassandra, HBase).</li>
+                            <li><strong>Avantages</strong> : Scalabilité massive, écritures rapides, optimisé pour les grands volumes.</li>
+                            <li><strong>Cas d'usage</strong> : Big Data, séries temporelles, IoT.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Graphes</strong> :
+                        <ul>
+                            <li>Stockage de nœuds et de relations (ex: Neo4j).</li>
+                            <li><strong>Avantages</strong> : Requêtes relationnelles complexes (ex: "trouver tous les amis d'amis").</li>
+                            <li><strong>Cas d'usage</strong> : Réseaux sociaux, recommandations, détection de fraudes.</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
 
-            <h3>1.2. ACID vs BASE</h3>
+            <h3>1.3 Théorème CAP</h3>
+            <p>
+                Dans un système distribué, il est impossible de garantir simultanément les trois propriétés suivantes :
+            </p>
+            <ul>
+                <li><strong>Cohérence (Consistency)</strong> : Tous les nœuds voient les mêmes données au même moment.</li>
+                <li><strong>Disponibilité (Availability)</strong> : Chaque requête reçoit une réponse, même en cas de panne partielle.</li>
+                <li><strong>Tolérance au partitionnement (Partition tolerance)</strong> : Le système continue de fonctionner malgré des pannes réseau.</li>
+            </ul>
+            <p>
+                <strong>Conséquence</strong> : Les bases NoSQL choisissent généralement <strong>2 des 3 propriétés</strong> :
+            </p>
             <table>
                 <thead>
                     <tr>
-                        <th>ACID (Bases de données relationnelles)</th>
-                        <th>BASE (Bases de données NoSQL)</th>
+                        <th>Type de Base</th>
+                        <th>Propriétés Garanties</th>
+                        <th>Exemple</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Atomicité</strong> : Une transaction est soit entièrement exécutée, soit pas du tout.</td>
-                        <td><strong>Basically Available</strong> : Le système garantit la disponibilité des données, même en cas de panne partielle.</td>
+                        <td>CP (Cohérence + Partition)</td>
+                        <td>Priorité à la cohérence, même en cas de partition.</td>
+                        <td>MongoDB (par défaut), etcd</td>
                     </tr>
                     <tr>
-                        <td><strong>Cohérence</strong> : Les données sont toujours dans un état valide après une transaction.</td>
-                        <td><strong>Soft state</strong> : L'état du système peut changer avec le temps, même sans intervention.</td>
+                        <td>AP (Disponibilité + Partition)</td>
+                        <td>Priorité à la disponibilité, cohérence eventualle.</td>
+                        <td>Cassandra, DynamoDB</td>
                     </tr>
                     <tr>
-                        <td><strong>Isolation</strong> : Les transactions concurrentes ne s'influencent pas mutuellement.</td>
-                        <td><strong>Eventual consistency</strong> : Les données deviennent cohérentes après un certain temps.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Durabilité</strong> : Une fois validée, une transaction persiste même en cas de panne.</td>
-                        <td>La durabilité est souvent sacrifiée pour la performance et la disponibilité.</td>
+                        <td>CA (Cohérence + Disponibilité)</td>
+                        <td>Possible seulement sans partition (rare en pratique).</td>
+                        <td>Bases SQL traditionnelles (non distribuées)</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>1.3. Théorème CAP</h3>
-            <p>
-                Le théorème CAP (Consistency, Availability, Partition tolerance) stipule qu'un système distribué ne peut garantir simultanément plus de deux des trois propriétés suivantes :
-            </p>
-            <ul>
-                <li><strong>Cohérence (Consistency)</strong> : Tous les nœuds voient les mêmes données au même moment.</li>
-                <li><strong>Disponibilité (Availability)</strong> : Chaque requête reçoit une réponse, même en cas de panne.</li>
-                <li><strong>Tolérance au partitionnement (Partition tolerance)</strong> : Le système continue de fonctionner même si des nœuds sont isolés.</li>
-            </ul>
-            <p>
-                En pratique, les systèmes NoSQL privilégient souvent la <strong>disponibilité</strong> et la <strong>tolérance au partitionnement</strong> au détriment de la cohérence immédiate.
-            </p>
+            <h3>1.4 BASE vs ACID</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ACID (SQL)</th>
+                        <th>BASE (NoSQL)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Atomicité</strong> : Une transaction est entièrement exécutée ou pas du tout.<br>
+                            <strong>Cohérence</strong> : Les données sont toujours valides après une transaction.<br>
+                            <strong>Isolation</strong> : Les transactions concurrentes ne s'influencent pas.<br>
+                            <strong>Durabilité</strong> : Une transaction validée persiste même après une panne.
+                        </td>
+                        <td>
+                            <strong>Basically Available</strong> : Le système garantit la disponibilité.<br>
+                            <strong>Soft state</strong> : L'état peut changer sans intervention.<br>
+                            <strong>Eventual consistency</strong> : Les données deviennent cohérentes après un certain temps.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Avantages</strong> : Cohérence forte, transactions fiables.<br>
+                            <strong>Inconvénients</strong> : Scalabilité limitée, schéma rigide.
+                        </td>
+                        <td>
+                            <strong>Avantages</strong> : Scalabilité horizontale, flexibilité, haute disponibilité.<br>
+                            <strong>Inconvénients</strong> : Cohérence eventualle, complexité applicative.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <h3>1.4. Les 4 V du Big Data</h3>
-            <ul>
-                <li><strong>Volume</strong> : Quantité massive de données générées.</li>
-                <li><strong>Vélocité</strong> : Vitesse à laquelle les données sont générées et traitées.</li>
-                <li><strong>Variété</strong> : Divers formats de données (texte, images, vidéos, etc.).</li>
-                <li><strong>Véracité</strong> : Qualité et fiabilité des données.</li>
-            </ul>
+            <h3>1.5 Quand utiliser NoSQL ?</h3>
+            <div class="important">
+                <strong>Cas d'usage idéaux pour NoSQL :</strong>
+                <ul>
+                    <li><strong>Données non structurées</strong> : JSON, XML, logs, médias.</li>
+                    <li><strong>Scalabilité massive</strong> : Millions d'utilisateurs ou de requêtes (ex: réseaux sociaux).</li>
+                    <li><strong>Flexibilité du schéma</strong> : Besoin d'ajouter/modifier des champs fréquemment.</li>
+                    <li><strong>Haute disponibilité</strong> : Tolérance aux pannes réseau ou matérielles.</li>
+                    <li><strong>Performance en écriture</strong> : Ex: IoT, métriques en temps réel.</li>
+                </ul>
+
+                <strong>Quand éviter NoSQL ?</strong>
+                <ul>
+                    <li>Données <strong>fortement relationnelles</strong> (ex: comptabilité, ERP).</li>
+                    <li>Besoin de <strong>transactions ACID strictes</strong> (ex: banques).</li>
+                    <li>Requêtes <strong>complexes avec jointures</strong>.</li>
+                </ul>
+            </div>
         </section>
-
-        <hr>
 
         <!-- Section MongoDB -->
         <section id="mongodb">
             <h2>2. MongoDB</h2>
 
             <section id="mongodb-intro">
-                <h3>2.1. Introduction à MongoDB</h3>
+                <h3>2.1 Introduction et Concepts</h3>
                 <p>
-                    MongoDB est une base de données NoSQL orientée documents. Elle stocke les données sous forme de documents JSON (BSON en interne), ce qui permet une grande flexibilité et une scalabilité horizontale.
+                    MongoDB est une base de données <strong>NoSQL orientée documents</strong>, utilisant le format <strong>BSON</strong> (JSON binaire). Elle est conçue pour la <strong>flexibilité</strong>, la <strong>scalabilité</strong> et les <strong>performances</strong>.
                 </p>
 
-                <div class="important">
-                    <strong>Caractéristiques principales :</strong>
-                    <ul>
-                        <li>Stockage sous forme de <strong>documents JSON</strong>.</li>
-                        <li>Requêtes riches avec un <strong>langage de requête JSON</strong>.</li>
-                        <li>Support des <strong>index</strong>, <strong>agrégations</strong>, et <strong>requêtes géospatiales</strong>.</li>
-                        <li>Réplication et <strong>sharding</strong> pour la scalabilité.</li>
-                        <li>Support des <strong>transactions ACID</strong> (depuis la version 4.0).</li>
-                    </ul>
-                </div>
-
-                <h4>2.1.1. Modèle de Données</h4>
+                <h4>2.1.1 Modèle de Données</h4>
+                <ul>
+                    <li><strong>Document</strong> : Unité de base (ex: <code>{ "_id": 1, "nom": "Alice", "âge": 30, "adresse": { "ville": "Paris" } }</code>).</li>
+                    <li><strong>Collection</strong> : Ensemble de documents (équivalent d'une table en SQL).</li>
+                    <li><strong>Base de données</strong> : Conteneur pour les collections.</li>
+                </ul>
                 <p>
-                    MongoDB utilise un modèle de données basé sur des <strong>collections</strong> (équivalent des tables en SQL) et des <strong>documents</strong> (équivalent des lignes en SQL). Chaque document est un objet JSON avec des paires clé-valeur.
+                    <strong>Exemple de document embarqué</strong> (évite les jointures) :
                 </p>
                 <pre>
 {
   "_id": ObjectId("507f1f77bcf86cd799439011"),
-  "name": "John Doe",
-  "age": 30,
-  "address": {
-    "street": "123 Main St",
-    "city": "New York",
-    "zip": "10001"
+  "nom": "Alice",
+  "âge": 30,
+  "adresse": {
+    "rue": "123 Rue de Paris",
+    "ville": "Paris",
+    "code_postal": "75000"
   },
-  "hobbies": ["reading", "hiking", "coding"]
+  "commandes": [
+    { "id": "cmd1", "montant": 99.99, "date": ISODate("2023-10-01T00:00:00Z") },
+    { "id": "cmd2", "montant": 49.99, "date": ISODate("2023-10-15T00:00:00Z") }
+  ]
 }
                 </pre>
 
-                <h4>2.1.2. Opérations CRUD</h4>
-                <p>
-                    MongoDB supporte les opérations CRUD (Create, Read, Update, Delete) via des méthodes simples :
-                </p>
-                <ul>
-                    <li><strong>Create</strong> : <code>db.collection.insertOne()</code> ou <code>insertMany()</code></li>
-                    <li><strong>Read</strong> : <code>db.collection.find()</code> ou <code>findOne()</code></li>
-                    <li><strong>Update</strong> : <code>db.collection.updateOne()</code> ou <code>updateMany()</code></li>
-                    <li><strong>Delete</strong> : <code>db.collection.deleteOne()</code> ou <code>deleteMany()</code></li>
-                </ul>
+                <h4>2.1.2 Opérations CRUD</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Opération</th>
+                            <th>Méthode MongoDB</th>
+                            <th>Exemple</th>
+                            <th>Équivalent SQL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Create</td>
+                            <td><code>insertOne()</code>, <code>insertMany()</code></td>
+                            <td><code>db.clients.insertOne({ nom: "Bob", âge: 25 })</code></td>
+                            <td><code>INSERT INTO clients VALUES (...)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Read</td>
+                            <td><code>find()</code>, <code>findOne()</code></td>
+                            <td><code>db.clients.find({ âge: { $gt: 20 } })</code></td>
+                            <td><code>SELECT * FROM clients WHERE age > 20</code></td>
+                        </tr>
+                        <tr>
+                            <td>Update</td>
+                            <td><code>updateOne()</code>, <code>updateMany()</code></td>
+                            <td><code>db.clients.updateOne({ nom: "Bob" }, { $set: { âge: 26 } })</code></td>
+                            <td><code>UPDATE clients SET age=26 WHERE name='Bob'</code></td>
+                        </tr>
+                        <tr>
+                            <td>Delete</td>
+                            <td><code>deleteOne()</code>, <code>deleteMany()</code></td>
+                            <td><code>db.clients.deleteOne({ nom: "Bob" })</code></td>
+                            <td><code>DELETE FROM clients WHERE name='Bob'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <h4>2.1.3. Agrégations</h4>
-                <p>
-                    MongoDB permet d'effectuer des agrégations complexes via un <strong>pipeline d'agrégation</strong>, qui est une séquence d'opérations appliquées aux documents.
-                </p>
+                <h4>2.1.3 Requêtes Avancées</h4>
+                <p><strong>Opérateurs de comparaison</strong> : <code>$eq</code>, <code>$ne</code>, <code>$gt</code>, <code>$lt</code>, <code>$in</code>, <code>$nin</code>.</p>
+                <p><strong>Opérateurs logiques</strong> : <code>$and</code>, <code>$or</code>, <code>$not</code>.</p>
+                <p><strong>Exemple</strong> : Trouver les clients de Paris âgés de plus de 25 ans :</p>
                 <pre>
-db.orders.aggregate([
-  { $match: { status: "completed" } },
-  { $group: { _id: "$customerId", total: { $sum: "$amount" } } },
+db.clients.find({
+  "adresse.ville": "Paris",
+  "âge": { $gt: 25 }
+})
+                </pre>
+
+                <h4>2.1.4 Agrégations</h4>
+                <p>Les agrégations permettent de traiter les données via un <strong>pipeline</strong> (séquence d'étapes).</p>
+                <p><strong>Étapes courantes</strong> :</p>
+                <ul>
+                    <li><code>$match</code> : Filtre les documents.</li>
+                    <li><code>$group</code> : Regroupe les documents par clé.</li>
+                    <li><code>$sort</code> : Trie les résultats.</li>
+                    <li><code>$project</code> : Sélectionne les champs à retourner.</li>
+                    <li><code>$limit</code> : Limite le nombre de résultats.</li>
+                </ul>
+                <p><strong>Exemple</strong> : Calculer le montant total des commandes par client :</p>
+                <pre>
+db.commandes.aggregate([
+  { $match: { "date": { $gte: ISODate("2023-01-01") } } },
+  { $group: {
+    _id: "$client_id",
+    total: { $sum: "$montant" },
+    count: { $sum: 1 }
+  }},
   { $sort: { total: -1 } }
 ])
                 </pre>
 
-                <h4>2.1.4. Index</h4>
-                <p>
-                    Les index améliorent les performances des requêtes en permettant un accès rapide aux documents. MongoDB supporte plusieurs types d'index :
-                </p>
+                <h4>2.1.5 Index</h4>
+                <p>Les index améliorent les performances des requêtes en permettant un accès rapide aux documents.</p>
                 <ul>
-                    <li>Index sur un seul champ : <code>db.collection.createIndex({ field: 1 })</code></li>
-                    <li>Index composé : <code>db.collection.createIndex({ field1: 1, field2: -1 })</code></li>
-                    <li>Index textuel : <code>db.collection.createIndex({ content: "text" })</code></li>
-                    <li>Index géospatial : <code>db.collection.createIndex({ location: "2dsphere" })</code></li>
+                    <li><strong>Création</strong> : <code>db.collection.createIndex({ "champ": 1 })</code> (1 = croissant, -1 = décroissant).</li>
+                    <li><strong>Types</strong> :
+                        <ul>
+                            <li>Index simple (un champ).</li>
+                            <li>Index composé (plusieurs champs).</li>
+                            <li>Index textuel (recherche full-text).</li>
+                            <li>Index géospatial (coordonnées GPS).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Exemple</strong> : Créer un index sur le champ <code>âge</code> :
+                        <pre>db.clients.createIndex({ "âge": 1 })</pre>
+                    </li>
                 </ul>
+                <div class="note">
+                    <p><strong>Attention</strong> : Les index accélèrent les lectures mais ralentissent les écritures (chaque index doit être mis à jour).</p>
+                </div>
 
-                <h4>2.1.5. Réplication et Sharding</h4>
-                <p>
-                    <strong>Réplication</strong> : MongoDB utilise des <strong>replica sets</strong> pour assurer la haute disponibilité. Un replica set est un groupe de serveurs MongoDB qui maintiennent les mêmes données, offrant une redondance et une tolérance aux pannes.
+                <h4>2.1.6 Réplication (Replica Sets)</h4>
+                <p>Un <strong>replica set</strong> est un groupe de serveurs MongoDB qui maintiennent les mêmes données pour assurer la <strong>haute disponibilité</strong>.</p>
+                <ul>
+                    <li><strong>Nœud primaire</strong> : Reçoit toutes les écritures.</li>
+                    <li><strong>Nœuds secondaires</strong> : Répliquent les données du primaire (lectures possibles).</li>
+                    <li><strong>Arbitre</strong> (optionnel) : Participe aux élections sans stocker de données.</li>
+                </ul>
+                <p><strong>Avantages</strong> :
+                <ul>
+                    <li>Tolérance aux pannes (si le primaire tombe, un secondaire est élu).</li>
+                    <li>Lectures scalables (répartition sur les secondaires).</li>
+                    <li>Sauvegardes sans impact sur le primaire.</li>
+                </ul>
                 </p>
-                <p>
-                    <strong>Sharding</strong> : Le sharding permet de répartir les données sur plusieurs machines (shards) pour améliorer les performances et la scalabilité. Un <strong>config server</strong> stocke les métadonnées du cluster, et un <strong>mongos</strong> (routeur) achemine les requêtes vers les shards appropriés.
-                </p>
+
+                <h4>2.1.7 Sharding</h4>
+                <p>Le <strong>sharding</strong> permet de répartir les données d'une collection sur plusieurs machines (<strong>shards</strong>) pour améliorer les performances et la capacité de stockage.</p>
+                <ul>
+                    <li><strong>Shard</strong> : Stocke une partie des données.</li>
+                    <li><strong>Config Server</strong> : Stocke les métadonnées du cluster.</li>
+                    <li><strong>Mongos</strong> : Routeur qui achemine les requêtes vers les shards.</li>
+                </ul>
+                <p><strong>Clé de sharding</strong> : Champ utilisé pour répartir les données (ex: <code>_id</code>, <code>client_id</code>).</p>
+                <div class="important">
+                    <p><strong>Stratégies de sharding</strong> :</p>
+                    <ul>
+                        <li><strong>Hachage</strong> : Bonne distribution, mais moins efficace pour les requêtes par plage.</li>
+                        <li><strong>Plage</strong> : Efficace pour les requêtes par plage, mais peut déséquilibrer les shards.</li>
+                        <li><strong>Clé composée</strong> : Combine plusieurs champs pour optimiser la distribution.</li>
+                    </ul>
+                </div>
             </section>
 
+            <!-- TP MongoDB -->
             <section id="mongodb-tp">
-                <h3>2.2. TP MongoDB</h3>
+                <h3>2.2 TP MongoDB avec Réponses</h3>
 
                 <div class="tp-section">
-                    <h4>2.2.1. Installation de MongoDB Standalone</h4>
+                    <h4>2.2.1 Installation Standalone</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pour quels cas d'usage voudrait-on installer un MongoDB standalone ?
+                        <strong>Q :</strong> Pourquoi installer MongoDB en mode standalone ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Un MongoDB standalone est adapté pour :
-                        </p>
+                        <strong>R :</strong>
                         <ul>
-                            <li>Les environnements de développement ou de test où la haute disponibilité n'est pas critique.</li>
-                            <li>Les petites applications avec un faible volume de données et de requêtes.</li>
-                            <li>Les démonstrations ou prototypes où la simplicité prime sur la résilience.</li>
+                            <li>Environnements de <strong>développement/test</strong> (simplicité).</li>
+                            <li>Applications avec <strong>faible volume de données</strong>.</li>
+                            <li>Prototypage ou démonstrations (pas besoin de haute disponibilité).</li>
                         </ul>
                     </div>
 
-                    <h4>2.2.2. Configuration de MongoDB</h4>
+                    <h4>2.2.2 Sécurité et Authentification</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi va-t-on avoir ce message « Access control is not enabled for the database », alors qu'on vient de configurer la sécurité ?
+                        <strong>Q :</strong> Pourquoi le message "Access control is not enabled" apparaît-il après avoir configuré la sécurité ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Ce message apparaît car la configuration de la sécurité (activation de l'authentification) nécessite un redémarrage du service MongoDB pour prendre effet. Tant que le service n'est pas redémarré, MongoDB fonctionne sans contrôle d'accès.
-                        </p>
+                        <strong>R :</strong>
+                        <p>La configuration de la sécurité (dans <code>/etc/mongod.conf</code>) nécessite un <strong>redémarrage du service</strong> pour prendre effet. Tant que MongoDB n'est pas redémarré, il fonctionne sans contrôle d'accès.</p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Qu'est-ce qui pourrait mal se passer dans cette procédure d'activation de l'authentification ? Que pourrait-on faire dans un ordre différent ?
+                        <strong>Q :</strong> Quels risques si on active l'authentification sans créer d'utilisateur administrateur ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Plusieurs problèmes peuvent survenir :
+                        <strong>R :</strong>
+                        <p>On risque de <strong>perdre l'accès</strong> à la base de données, car aucun utilisateur ne pourra se connecter pour créer des comptes ou modifier la configuration.</p>
+                        <p><strong>Solution</strong> : Toujours créer un utilisateur admin <strong>avant</strong> d'activer l'authentification :
+                        <pre>
+use admin
+db.createUser({
+  user: "admin",
+  pwd: "motdepasse",
+  roles: ["root"]
+})
+                        </pre>
                         </p>
+                    </div>
+
+                    <h4>2.2.3 Manipulation des Données</h4>
+                    <div class="question">
+                        <strong>Q :</strong> Pourquoi la base "user-data" n'est-elle pas visible avant d'y créer une collection ?
+                    </div>
+                    <div class="answer">
+                        <strong>R :</strong>
+                        <p>MongoDB utilise une <strong>création paresseuse</strong> : une base ou une collection n'apparaît que lorsqu'elle contient des données (ou qu'une collection y est explicitement créée).</p>
+                    </div>
+
+                    <h4>2.2.4 Import/Export de Données</h4>
+                    <div class="question">
+                        <strong>Q :</strong> À quoi sert la commande <code>sha256sum</code> sur le fichier <code>primer-dataset.json</code> ?
+                    </div>
+                    <div class="answer">
+                        <strong>R :</strong>
+                        <p>Elle calcule une <strong>empreinte cryptographique</strong> (hash) du fichier pour :
                         <ul>
-                            <li>Oublier de créer un utilisateur administrateur avant d'activer l'authentification, ce qui peut verrouiller l'accès à la base.</li>
-                            <li>Ne pas redémarrer le service après avoir modifié la configuration, ce qui laisse le système non sécurisé.</li>
-                            <li>Erreurs de syntaxe dans le fichier de configuration (<code>/etc/mongod.conf</code>).</li>
+                            <li>Vérifier son <strong>intégrité</strong> (pas de corruption lors du téléchargement).</li>
+                            <li>Comparer avec une somme de contrôle attendue (ex: fournie par le site source).</li>
                         </ul>
-                        <p>
-                            Pour éviter ces problèmes, il est recommandé de :
-                        </p>
-                        <ol>
-                            <li>Créer un utilisateur administrateur <strong>avant</strong> d'activer l'authentification.</li>
-                            <li>Vérifier la syntaxe du fichier de configuration.</li>
-                            <li>Redémarrer le service après toute modification.</li>
-                        </ol>
-                    </div>
-
-                    <h4>2.2.3. Manipulation des Données</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Pourquoi ne voit-on pas la base « user-data » avant d'y créer une collection ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            MongoDB utilise un mécanisme de <strong>création paresseuse</strong> (lazy creation). Une base de données ou une collection n'apparaît pas tant qu'elle ne contient pas de données. Ainsi, la base « user-data » n'est visible qu'après la création d'une collection ou l'insertion de données.
-                        </p>
-                    </div>
-
-                    <h4>2.2.4. Import de Données</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Que fait le « one-liner » <code>pushd /tmp ; wget https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json ; popd /tmp ~</code> ? Qu'est-ce qu'un « one-liner » ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Ce « one-liner » est une commande unique qui effectue plusieurs actions :
-                        </p>
-                        <ol>
-                            <li><code>pushd /tmp</code> : Change le répertoire courant pour <code>/tmp</code> et sauvegarde le répertoire précédent dans une pile.</li>
-                            <li><code>wget https://raw.githubusercontent.com/...</code> : Télécharge le fichier <code>primer-dataset.json</code> depuis GitHub.</li>
-                            <li><code>popd</code> : Revient au répertoire précédent (avant le <code>pushd</code>).</li>
-                        </ol>
-                        <p>
-                            Un « one-liner » est une commande ou un script condensé en une seule ligne, souvent utilisé pour effectuer une série d'opérations rapidement.
                         </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Que fait la commande <code>sha256sum /tmp/primer-dataset.json</code> ? À quoi cela sert-il ?
+                        <strong>Q :</strong> Que fait le "one-liner" <code>pushd /tmp ; wget ... ; popd</code> ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La commande <code>sha256sum</code> calcule une <strong>empreinte cryptographique</strong> (hash) du fichier <code>primer-dataset.json</code> en utilisant l'algorithme SHA-256. Cela permet de :
-                        </p>
+                        <strong>R :</strong>
+                        <p>C'est une séquence de commandes en une ligne :
                         <ul>
-                            <li>Vérifier l'<strong>intégrité</strong> du fichier (s'assurer qu'il n'a pas été modifié).</li>
-                            <li>Comparer le fichier téléchargé avec une somme de contrôle attendue pour détecter toute corruption ou altération.</li>
+                            <li><code>pushd /tmp</code> : Change de répertoire vers <code>/tmp</code> et sauvegarde l'ancien.</li>
+                            <li><code>wget ...</code> : Télécharge un fichier depuis GitHub.</li>
+                            <li><code>popd</code> : Retourne au répertoire précédent.</li>
                         </ul>
+                        </p>
                     </div>
 
-                    <h4>2.2.5. Sharded Cluster</h4>
+                    <h4>2.2.5 Sharded Cluster</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi reprendre la nomenclature et l'organisation des ressources (FQDN:Port) d'un cluster complexe pour créer un cluster simple ?
+                        <strong>Q :</strong> Pourquoi utiliser des adresses en <code>127.0.3.x</code> dans ce lab ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Même pour un cluster simple, utiliser une nomenclature cohérente avec celle d'un cluster complexe permet de :
-                        </p>
-                        <ul>
-                            <li>Faciliter la <strong>compréhension</strong> et la <strong>maintenance</strong> du cluster.</li>
-                            <li>Préparer une <strong>évolution future</strong> vers un cluster plus complexe sans avoir à renommer les ressources.</li>
-                            <li>Standardiser les <strong>pratiques</strong> et les <strong>scripts</strong> de déploiement.</li>
-                            <li>Simuler un environnement de production même en développement ou en test.</li>
-                        </ul>
-                    </div>
-
-                    <div class="question">
-                        <strong>Question :</strong> Qu'est-ce qu'un FQDN ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Un <strong>FQDN</strong> (Fully Qualified Domain Name) est le nom complet d'un hôte sur un réseau, incluant le nom de l'hôte et le nom de domaine. Par exemple, <code>mongo-config-r1.lab.local</code> est un FQDN où :
-                        </p>
-                        <ul>
-                            <li><code>mongo-config-r1</code> est le nom de l'hôte.</li>
-                            <li><code>lab.local</code> est le nom de domaine.</li>
-                        </ul>
-                    </div>
-
-                    <div class="question">
-                        <strong>Question :</strong> Que sont ces adresses en 127.0.3.x ? Pourquoi les utiliser dans ce lab ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Les adresses <code>127.0.3.x</code> font partie de la plage <code>127.0.0.0/8</code>, réservée pour la boucle locale (<strong>localhost</strong>). Elles sont utilisées dans ce lab pour :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Ces adresses font partie de la plage <strong>localhost</strong> (<code>127.0.0.0/8</code>) et permettent de :
                         <ul>
                             <li>Simuler plusieurs interfaces réseau sur une seule machine.</li>
                             <li>Éviter les conflits avec d'autres adresses IP réelles.</li>
-                            <li>Tester des configurations de cluster sans avoir besoin de plusieurs machines physiques.</li>
+                            <li>Tester un cluster sans besoin de plusieurs machines physiques.</li>
                         </ul>
-                    </div>
-
-                    <h4>2.2.6. Configuration des Services</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Pourquoi nommer le dossier <code>/data/mongo...</code> différemment sur chaque serveur ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Chaque instance MongoDB (config server, shard, router) doit avoir son propre dossier de données pour :
                         </p>
-                        <ul>
-                            <li>Éviter les <strong>conflits</strong> entre les différentes instances.</li>
-                            <li>Permettre une <strong>gestion indépendante</strong> des données de chaque service.</li>
-                            <li>Faciliter le <strong>débogage</strong> et la <strong>maintenance</strong> en isolant les données.</li>
-                        </ul>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi passer les services en démarrage automatique ?
+                        <strong>Q :</strong> Pourquoi nommer les dossiers de données différemment pour chaque service (config server, shard, etc.) ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Activer le démarrage automatique des services (via <code>systemctl enable</code>) permet de :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
-                            <li>Assurer que les services <strong>redémarrent automatiquement</strong> après un redémarrage du serveur.</li>
-                            <li>Éviter de devoir <strong>lancer manuellement</strong> chaque service après une panne ou une maintenance.</li>
-                            <li>Garantir la <strong>disponibilité</strong> continue des services en production.</li>
+                            <li>Éviter les <strong>conflits</strong> entre les instances.</li>
+                            <li>Isoler les données de chaque service (facilite la maintenance et le débogage).</li>
+                            <li>Permettre une gestion indépendante (ex: sauvegardes ciblées).</li>
                         </ul>
+                        </p>
                     </div>
 
+                    <h4>2.2.6 Index et Performances</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi attendre la toute fin de sa création avant de passer le service en démarrage automatique ?
+                        <strong>Q :</strong> Comment un index améliore-t-il les performances des requêtes ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Il est préférable d'attendre la fin de la création et de la configuration pour activer le démarrage automatique afin de :
-                        </p>
-                        <ul>
-                            <li>Éviter que le service ne <strong>démarre avec une configuration incomplète</strong>.</li>
-                            <li>Pouvoir <strong>tester manuellement</strong> le service avant de l'automatiser.</li>
-                            <li>Corriger d'éventuelles <strong>erreurs de configuration</strong> avant qu'elles n'affectent le démarrage automatique.</li>
-                        </ul>
-                    </div>
-
-                    <h4>2.2.7. Index et Performances</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Commentez la création de l'index, et son effet sur le plan d'exécution.
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La création d'un index sur un champ (par exemple <code>db.restaurants.createIndex({ "address.zipcode": 1 })</code>) permet d'améliorer significativement les performances des requêtes qui filtrent ou trient sur ce champ. Avant la création de l'index, MongoDB doit effectuer un <strong>scanning complet de la collection</strong> (<code>COLLSCAN</code>), ce qui est coûteux en temps et en ressources.
-                        </p>
-                        <p>
-                            Après la création de l'index, MongoDB utilise un <strong>scan d'index</strong> (<code>IXSCAN</code>), qui est beaucoup plus rapide car il permet un accès direct aux documents pertinents sans parcourir toute la collection.
-                        </p>
-                        <p>
-                            Cependant, les index ont un coût :
-                        </p>
-                        <ul>
-                            <li>Ils <strong>consomment de l'espace disque</strong> supplémentaire.</li>
-                            <li>Ils <strong>ralentissent les écritures</strong> (insertions, mises à jour, suppressions) car chaque index doit être mis à jour.</li>
-                        </ul>
+                        <strong>R :</strong>
+                        <p>Sans index, MongoDB doit effectuer un <strong>scanning complet</strong> de la collection (<code>COLLSCAN</code>), ce qui est lent pour les grandes collections.</p>
+                        <p>Avec un index, MongoDB utilise un <strong>scan d'index</strong> (<code>IXSCAN</code>), qui permet un accès direct aux documents pertinents, comme un index dans un livre.</p>
+                        <p><strong>Exemple</strong> : Sans index sur <code>age</code>, la requête <code>db.clients.find({ age: { $gt: 25 } })</code> scanne tous les documents. Avec un index, elle utilise l'arbre B de l'index pour trouver rapidement les documents.</p>
                     </div>
                 </div>
             </section>
         </section>
-
-        <hr>
 
         <!-- Section ELK -->
         <section id="elk">
             <h2>3. Stack ELK</h2>
 
             <section id="elk-intro">
-                <h3>3.1. Introduction à la Stack ELK</h3>
+                <h3>3.1 Introduction et Composants</h3>
                 <p>
-                    La stack ELK (Elasticsearch, Logstash, Kibana) est une solution populaire pour la collecte, le traitement, l'indexation et la visualisation de données, notamment des logs. Elle est souvent utilisée pour l'analyse de logs, la recherche full-text, et la visualisation de données en temps réel.
+                    La stack ELK est une solution open-source pour la <strong>collecte</strong>, le <strong>traitement</strong>, le <strong>stockage</strong> et la <strong>visualisation</strong> de données, notamment des logs.
                 </p>
 
-                <div class="important">
-                    <strong>Composants principaux :</strong>
-                    <ul>
-                        <li><strong>Elasticsearch</strong> : Moteur de recherche et de stockage distribué.</li>
-                        <li><strong>Logstash</strong> : Outil de collecte, de transformation et de transport de données.</li>
-                        <li><strong>Kibana</strong> : Interface de visualisation et d'exploration des données.</li>
-                        <li><strong>Beats/Elastic Agent</strong> : Agents légers pour la collecte de données (logs, métriques, etc.).</li>
-                    </ul>
-                </div>
-
-                <h4>3.1.1. Elasticsearch</h4>
+                <h4>3.1.1 Elasticsearch</h4>
                 <p>
-                    Elasticsearch est un moteur de recherche distribué basé sur Apache Lucene. Il est conçu pour le stockage, la recherche et l'analyse de grandes quantités de données en temps quasi réel.
+                    Moteur de recherche et d'analyse distribué, basé sur <strong>Apache Lucene</strong>. Il stocke les données sous forme de <strong>documents JSON</strong> dans des <strong>index</strong>.
                 </p>
                 <ul>
-                    <li>Stockage sous forme de <strong>documents JSON</strong> dans des <strong>index</strong>.</li>
-                    <li>Support des <strong>requêtes full-text</strong>, des <strong>agrégations</strong>, et des <strong>requêtes géospatiales</strong>.</li>
-                    <li>Architecture distribuée avec <strong>sharding</strong> et <strong>réplication</strong>.</li>
+                    <li><strong>Shards</strong> : Partitionnement horizontal des index.</li>
+                    <li><strong>Répliques</strong> : Copies des shards pour la redondance.</li>
+                    <li><strong>Requêtes</strong> : Support des requêtes full-text, des agrégations et des filtres.</li>
                 </ul>
 
-                <h4>3.1.2. Logstash</h4>
+                <h4>3.1.2 Logstash</h4>
                 <p>
-                    Logstash est un outil de traitement de données qui permet de collecter des données depuis diverses sources, de les transformer, et de les envoyer vers une destination (souvent Elasticsearch).
+                    Outil de traitement de données (ETL) avec un pipeline en 3 étapes :
+                </p>
+                <ol>
+                    <li><strong>Input</strong> : Source des données (fichiers, bases de données, APIs).</li>
+                    <li><strong>Filter</strong> : Transformation des données (parsing, enrichissement).</li>
+                    <li><strong>Output</strong> : Destination (Elasticsearch, fichiers, etc.).</li>
+                </ol>
+                <p><strong>Exemple de configuration</strong> :</p>
+                <pre>
+input {
+  file {
+    path => "/var/log/apache2/access.log"
+    start_position => "beginning"
+  }
+}
+filter {
+  grok {
+    match => { "message" => "%{COMBINEDAPACHELOG}" }
+  }
+  date {
+    match => [ "timestamp", "dd/MMM/yyyy:HH:mm:ss Z" ]
+  }
+}
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "apache-logs-%{+YYYY.MM.dd}"
+  }
+}
+                </pre>
+
+                <h4>3.1.3 Kibana</h4>
+                <p>
+                    Interface web pour visualiser et explorer les données stockées dans Elasticsearch.
                 </p>
                 <ul>
-                    <li>Pipeline en trois étapes : <strong>Input</strong> → <strong>Filter</strong> → <strong>Output</strong>.</li>
-                    <li>Support de nombreux <strong>plugins</strong> pour la collecte (fichiers, bases de données, APIs, etc.) et la transformation (parsing, enrichissement, normalisation).</li>
+                    <li><strong>Discover</strong> : Exploration interactive des données.</li>
+                    <li><strong>Visualize</strong> : Création de graphiques (histogrammes, cartes, etc.).</li>
+                    <li><strong>Dashboard</strong> : Tableaux de bord personnalisés.</li>
+                    <li><strong>Alerting</strong> : Configuration d'alertes basées sur des seuils.</li>
                 </ul>
 
-                <h4>3.1.3. Kibana</h4>
+                <h4>3.1.4 Beats</h4>
                 <p>
-                    Kibana est une interface web pour visualiser et explorer les données stockées dans Elasticsearch. Elle permet de créer des tableaux de bord (<strong>dashboards</strong>), des graphiques, et des requêtes interactives.
+                    Agents légers pour collecter des données et les envoyer à Logstash ou Elasticsearch.
                 </p>
-                <ul>
-                    <li>Exploration des données avec <strong>Discover</strong>.</li>
-                    <li>Création de visualisations avec <strong>Visualize</strong> ou <strong>Lens</strong>.</li>
-                    <li>Gestion des index et des configurations via <strong>Stack Management</strong>.</li>
-                </ul>
-
-                <h4>3.1.4. Beats et Elastic Agent</h4>
-                <p>
-                    Les Beats (comme Filebeat, Metricbeat) et Elastic Agent sont des agents légers qui collectent des données (logs, métriques, etc.) et les envoient à Logstash ou directement à Elasticsearch.
-                </p>
-                <ul>
-                    <li><strong>Filebeat</strong> : Collecte et envoie des fichiers de logs.</li>
-                    <li><strong>Metricbeat</strong> : Collecte des métriques système.</li>
-                    <li><strong>Elastic Agent</strong> : Agent unifié pour déployer et gérer plusieurs Beats.</li>
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Beat</th>
+                            <th>Type de Données</th>
+                            <th>Exemple d'usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Filebeat</td>
+                            <td>Fichiers de logs</td>
+                            <td>Logs Apache, Nginx, applications</td>
+                        </tr>
+                        <tr>
+                            <td>Metricbeat</td>
+                            <td>Métriques système</td>
+                            <td>CPU, mémoire, disque, réseau</td>
+                        </tr>
+                        <tr>
+                            <td>Packetbeat</td>
+                            <td>Trafic réseau</td>
+                            <td>Analyse des paquets HTTP, DNS</td>
+                        </tr>
+                        <tr>
+                            <td>Heartbeat</td>
+                            <td>Disponibilité des services</td>
+                            <td>Monitoring des uptimes</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
+            <!-- TP ELK -->
             <section id="elk-tp">
-                <h3>3.2. TP ELK</h3>
+                <h3>3.2 TP ELK avec Réponses</h3>
 
                 <div class="tp-section">
-                    <h4>3.2.1. Installation d'Elasticsearch</h4>
+                    <h4>3.2.1 Installation d'Elasticsearch</h4>
                     <div class="question">
-                        <strong>Question :</strong> Que signifient les paramètres <code>-Xms512m</code> et <code>-Xmx512m</code> dans le fichier <code>jvm.options</code> ?
+                        <strong>Q :</strong> Que signifient <code>-Xms512m</code> et <code>-Xmx512m</code> dans <code>jvm.options</code> ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Ces paramètres définissent la taille de la <strong>mémoire heap</strong> allouée à la JVM (Java Virtual Machine) qui exécute Elasticsearch :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Ces paramètres définissent la taille de la <strong>mémoire heap</strong> allouée à la JVM (Java Virtual Machine) :
                         <ul>
-                            <li><code>-Xms512m</code> : Définit la taille <strong>initiale</strong> de la heap à 512 Mo.</li>
-                            <li><code>-Xmx512m</code> : Définit la taille <strong>maximale</strong> de la heap à 512 Mo.</li>
+                            <li><code>-Xms512m</code> : Taille <strong>initiale</strong> de la heap (512 Mo).</li>
+                            <li><code>-Xmx512m</code> : Taille <strong>maximale</strong> de la heap (512 Mo).</li>
                         </ul>
-                        <p>
-                            En fixant ces deux valeurs à la même taille, on évite à la JVM de redimensionner dynamiquement la heap, ce qui peut améliorer les performances et la stabilité.
                         </p>
+                        <p>En fixant <code>-Xms</code> et <code>-Xmx</code> à la même valeur, on évite à la JVM de redimensionner dynamiquement la heap, ce qui améliore les performances.</p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi n'a-t-on pas activé le démarrage automatique du service Elasticsearch dès l'installation ?
+                        <strong>Q :</strong> Pourquoi ne pas activer le démarrage automatique d'Elasticsearch dès l'installation ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Il est préférable de ne pas activer immédiatement le démarrage automatique pour :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
                             <li>Vérifier que le service <strong>démarre correctement</strong> en mode manuel.</li>
-                            <li>S'assurer que la <strong>configuration</strong> est correcte avant de l'automatiser.</li>
+                            <li>S'assurer que la <strong>configuration</strong> est valide avant de l'automatiser.</li>
                             <li>Éviter que des <strong>erreurs de configuration</strong> ne bloquent le démarrage du système.</li>
                         </ul>
+                        </p>
                     </div>
 
-                    <h4>3.2.2. Installation de Kibana</h4>
+                    <h4>3.2.2 Installation de Kibana</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi utiliser une redirection de port vers votre hôte plutôt que d'installer un navigateur sur votre serveur ?
+                        <strong>Q :</strong> Pourquoi utiliser une redirection de port SSH plutôt qu'un navigateur sur le serveur ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Utiliser une redirection de port (via SSH) permet de :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
-                            <li>Accéder à l'interface Kibana depuis votre <strong>machine locale</strong> sans exposer le serveur.</li>
-                            <li>Éviter d'installer des <strong>logiciels inutiles</strong> (comme un navigateur) sur le serveur.</li>
-                            <li>Centraliser la gestion des accès et des <strong>pare-feux</strong>.</li>
+                            <li>Accéder à Kibana depuis sa <strong>machine locale</strong> sans exposer le serveur.</li>
+                            <li>Éviter d'installer un <strong>navigateur</strong> sur le serveur (sécurité et ressources).</li>
+                            <li>Centraliser la gestion des accès (via SSH).</li>
                         </ul>
+                        </p>
+                        <p><strong>Exemple de commande</strong> :
+                        <pre>
+ssh -L 127.0.0.1:15601:127.0.0.1:5601 -l user -p 22 serveur_ip
+                        </pre>
+                        <p>Cette commande redirige le port local <code>15601</code> vers le port <code>5601</code> (Kibana) sur le serveur.</p>
+                        </p>
+                    </div>
+
+                    <h4>3.2.3 Configuration de Logstash</h4>
+                    <div class="question">
+                        <strong>Q :</strong> Quel est le nom générique des outils comme Logstash ?
+                    </div>
+                    <div class="answer">
+                        <strong>R :</strong>
+                        <p>Ces outils sont appelés des <strong>ETL</strong> (Extract, Transform, Load) ou des <strong>pipelines de traitement de données</strong>.</p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Comment interpréter la commande <code>ssh -L 127.0.0.1:15601:127.0.0.1:5601 -l user -p &lt;port&gt; -v &lt;adresse_ip&gt;</code> ?
+                        <strong>Q :</strong> À quoi sert la commande <code>vmstat -S M 60</code> avec un timestamp ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Cette commande SSH crée un <strong>tunnel SSH</strong> qui redirige le port local <code>15601</code> vers le port <code>5601</code> (Kibana) sur le serveur distant. Voici la décomposition :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Elle surveille les <strong>performances système</strong> (CPU, mémoire, E/S) toutes les 60 secondes, avec un timestamp ajouté pour :
                         <ul>
-                            <li><code>-L 127.0.0.1:15601:127.0.0.1:5601</code> : Redirige le port local <code>15601</code> vers <code>127.0.0.1:5601</code> sur le serveur.</li>
-                            <li><code>-l user</code> : Spécifie l'utilisateur pour la connexion SSH.</li>
-                            <li><code>-p &lt;port&gt;</code> : Spécifie le port SSH du serveur (par défaut 22).</li>
-                            <li><code>-v</code> : Active le mode verbeux pour le débogage.</li>
-                            <li><code>&lt;adresse_ip&gt;</code> : Adresse IP du serveur distant.</li>
+                            <li>Corréler les métriques avec les <strong>événements</strong> (ex: exécution de Logstash).</li>
+                            <li>Analyser l'impact des traitements sur les ressources.</li>
                         </ul>
-                        <p>
-                            Ainsi, en accédant à <code>http://127.0.0.1:15601</code> sur votre machine locale, vous accédez en réalité à Kibana sur le serveur distant.
                         </p>
                     </div>
 
-                    <h4>3.2.3. Installation de Logstash</h4>
+                    <h4>3.2.4 Analyse de Logs</h4>
                     <div class="question">
-                        <strong>Question :</strong> Quel nom générique donne-t-on aux produits qui ont les fonctionnalités de Logstash (collecte, transformation, transport) ?
+                        <strong>Q :</strong> Pourquoi s'inquiéter de la synchronisation de l'heure sur les serveurs ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Les outils comme Logstash sont généralement appelés des <strong>ETL</strong> (Extract, Transform, Load) ou des <strong>pipelines de traitement de données</strong>. Ils sont utilisés pour :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour garantir :
                         <ul>
-                            <li><strong>Extraire</strong> (Extract) des données depuis diverses sources.</li>
-                            <li><strong>Transformer</strong> (Transform) les données (nettoyage, enrichissement, normalisation).</li>
-                            <li><strong>Charger</strong> (Load) les données vers une destination (base de données, fichier, etc.).</li>
+                            <li>La <strong>cohérence des timestamps</strong> dans les logs.</li>
+                            <li>Un <strong>séquençage correct</strong> des événements (ex: logs dans l'ordre chronologique).</li>
+                            <li>Le bon fonctionnement des <strong>certificats TLS</strong> et des mécanismes de sécurité.</li>
                         </ul>
-                    </div>
-
-                    <div class="question">
-                        <strong>Question :</strong> Comment interpréter la commande <code>sudo sed 's/#--max-old-space-size=4096/--max-old-space-size=1024/' -i /etc/kibana/node.options</code> ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Cette commande utilise <code>sed</code> pour modifier le fichier <code>/etc/kibana/node.options</code> :
-                        </p>
-                        <ul>
-                            <li><code>s/#--max-old-space-size=4096/--max-old-space-size=1024/</code> : Remplace la ligne commentée <code>#--max-old-space-size=4096</code> par <code>--max-old-space-size=1024</code>.</li>
-                            <li><code>-i</code> : Modifie le fichier en place (in-place).</li>
-                        </ul>
-                        <p>
-                            Cela réduit la mémoire maximale allouée à Kibana de 4 Go à 1 Go, ce qui est suffisant pour un environnement de test ou de développement.
-                        </p>
-                    </div>
-
-                    <h4>3.2.4. Configuration de Logstash</h4>
-                    <div class="question">
-                        <strong>Question :</strong> À quoi sert la commande <code>vmstat -S M 60 | (while read line ; do echo -e "$(date '+%Y-%m-%d %H:%M:%S %z')|$line"; done)</code> ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Cette commande permet de surveiller les performances système toutes les 60 secondes et d'ajouter un timestamp à chaque ligne de sortie :
-                        </p>
-                        <ul>
-                            <li><code>vmstat -S M 60</code> : Affiche les statistiques système (CPU, mémoire, E/S) toutes les 60 secondes, avec des unités en mégaoctets (<code>-S M</code>).</li>
-                            <li><code>while read line ; do echo -e "$(date '+%Y-%m-%d %H:%M:%S %z')|$line"; done</code> : Pour chaque ligne de sortie de <code>vmstat</code>, ajoute un timestamp au format <code>AAAA-MM-JJ HH:MM:SS fuseau_horaire</code>.</li>
-                        </ul>
-                        <p>
-                            Cela permet de corréler les performances système avec les événements (comme l'exécution de Logstash).
                         </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi s'inquiéter de mettre notre serveur à l'heure ?
+                        <strong>Q :</strong> Pourquoi utiliser <code>/etc/hosts</code> plutôt qu'un DNS dans ce lab ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La synchronisation de l'heure est cruciale pour :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
-                            <li>Garantir la <strong>cohérence des timestamps</strong> dans les logs et les données.</li>
-                            <li>Éviter les problèmes de <strong>séquençage des événements</strong> (par exemple, des logs dans le désordre).</li>
-                            <li>Assurer le bon fonctionnement des <strong>mécanismes de sécurité</strong> (certificats TLS, tokens d'authentification).</li>
-                            <li>Faciliter le <strong>débogage</strong> et l'<strong>analyse des logs</strong>.</li>
-                        </ul>
-                    </div>
-
-                    <h4>3.2.5. Analyse de Logs avec Logstash</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Pourquoi utilise-t-on la résolution par le fichier <code>/etc/hosts</code> dans ce lab ? Comment ferait-on dans le SI d'une organisation ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Dans ce lab, on utilise <code>/etc/hosts</code> pour :
-                        </p>
-                        <ul>
-                            <li>Simuler un <strong>DNS local</strong> sans avoir à configurer un serveur DNS.</li>
-                            <li>Définir des <strong>alias</strong> pour les services (ex: <code>mongo-config-r1</code>).</li>
+                            <li>Simuler un DNS local <strong>sans serveur DNS</strong>.</li>
+                            <li>Définir des <strong>alias</strong> (ex: <code>mongo-config-r1</code>) facilement.</li>
                             <li>Faciliter les tests en environnement isolé.</li>
                         </ul>
-                        <p>
-                            Dans un SI d'organisation, on utiliserait plutôt :
                         </p>
-                        <ul>
-                            <li>Un <strong>serveur DNS interne</strong> (comme Bind ou PowerDNS).</li>
-                            <li>Des <strong>enregistrements CNAME</strong> pour les alias.</li>
-                            <li>Un <strong>système de gestion de configuration</strong> (comme Ansible ou Puppet) pour déployer les configurations.</li>
-                        </ul>
+                        <p>En production, on utiliserait un <strong>DNS interne</strong> (Bind, PowerDNS) ou un système de gestion de configuration (Ansible).</p>
                     </div>
 
+                    <h4>3.2.5 Visualisation avec Kibana</h4>
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi voudrait-on désigner les services par des alias plutôt que par leur IP ou le nom du serveur qui les porte ?
+                        <strong>Q :</strong> Pourquoi la visualisation par défaut est-elle sur les 15 dernières minutes ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Utiliser des alias présente plusieurs avantages :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
-                            <li><strong>Abstraction</strong> : Les alias masquent les détails d'implémentation (IP, nom d'hôte).</li>
-                            <li><strong>Flexibilité</strong> : On peut changer l'IP ou le serveur sous-jacent sans modifier les configurations des clients.</li>
-                            <li><strong>Lisibilité</strong> : Les noms comme <code>mongo-config-r1</code> sont plus explicites que des IP.</li>
-                            <li><strong>Gestion centralisée</strong> : Les alias peuvent être gérés centralement via DNS ou <code>/etc/hosts</code>.</li>
-                        </ul>
-                    </div>
-
-                    <div class="question">
-                        <strong>Question :</strong> Pourquoi la commande <code>ss</code> renvoie-t-elle plus d'informations (une colonne en plus) que lors de ses appels précédents ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La commande <code>ss -lntp</code> (ou <code>ss -Intp</code>) affiche les <strong>sockets en écoute</strong> avec des informations supplémentaires, notamment :
-                        </p>
-                        <ul>
-                            <li>La colonne <code>Process</code> (ajoutée avec <code>-p</code>) montre le <strong>PID et le nom du processus</strong> utilisant chaque socket.</li>
-                            <li>Les options <code>-l</code> (listening), <code>-n</code> (numeric, pas de résolution DNS), <code>-t</code> (TCP), et <code>-p</code> (process) combinées donnent une vue détaillée des connexions actives et des processus associés.</li>
-                        </ul>
-                    </div>
-
-                    <h4>3.2.6. Visualisation avec Kibana</h4>
-                    <div class="question">
-                        <strong>Question :</strong> Pourquoi la visualisation est-elle par défaut sur les 15 dernières minutes ? Comment modifier cette période ?
-                    </div>
-                    <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Kibana utilise un filtre temporel par défaut de 15 minutes pour :
-                        </p>
-                        <ul>
-                            <li>Se concentrer sur les <strong>données récentes</strong> (pertinentes pour le monitoring en temps réel).</li>
+                            <li>Se concentrer sur les <strong>données récentes</strong> (pertinentes pour le monitoring).</li>
                             <li>Éviter de surcharger l'interface avec trop de données.</li>
                         </ul>
-                        <p>
-                            Pour modifier cette période :
                         </p>
+                        <p><strong>Modifier la période</strong> :
                         <ol>
-                            <li>Dans l'interface Kibana, allez dans <strong>Discover</strong> ou un <strong>dashboard</strong>.</li>
-                            <li>En haut à droite, cliquez sur le sélecteur de temps (ex: "Last 15 minutes").</li>
-                            <li>Choisissez une période prédéfinie (ex: "Last 1 hour", "Last 24 hours") ou définissez une période personnalisée.</li>
+                            <li>Dans Kibana, aller dans <strong>Discover</strong> ou un dashboard.</li>
+                            <li>Cliquer sur le sélecteur de temps en haut à droite.</li>
+                            <li>Choisir une période prédéfinie ou personnalisée.</li>
                         </ol>
+                        </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Quelles visualisations vous sembleraient utiles pour analyser les logs Apache ?
+                        <strong>Q :</strong> Quelles visualisations sont utiles pour analyser les logs Apache ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Pour analyser les logs Apache, les visualisations suivantes sont utiles :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Exemples de visualisations pertinentes :
                         <ul>
-                            <li><strong>Histogramme des codes HTTP</strong> : Pour identifier les erreurs (404, 500, etc.).</li>
-                            <li><strong>Répartition des requêtes par URL</strong> : Pour voir quelles pages sont les plus visitées.</li>
-                            <li><strong>Nombre de requêtes par client (IP)</strong> : Pour détecter des activités suspectes (ex: attaques DDoS).</li>
-                            <li><strong>Temps de réponse moyen par URL</strong> : Pour identifier les pages lentes.</li>
-                            <li><strong>Répartition des user-agents</strong> : Pour connaître les navigateurs ou robots accédant au site.</li>
-                            <li><strong>Cartographie géographique des clients</strong> : Pour visualiser la provenance géographique des requêtes.</li>
-                            <li><strong>Évolution du trafic dans le temps</strong> : Pour identifier les pics de trafic.</li>
+                            <li><strong>Histogramme des codes HTTP</strong> : Détecter les erreurs (404, 500).</li>
+                            <li><strong>Top URLs</strong> : Identifier les pages les plus visitées.</li>
+                            <li><strong>Répartition par IP client</strong> : Détecter des attaques (DDoS).</li>
+                            <li><strong>Temps de réponse par URL</strong> : Trouver les pages lentes.</li>
+                            <li><strong>User-Agents</strong> : Connaître les navigateurs/robots.</li>
+                            <li><strong>Carte géographique</strong> : Visualiser la provenance des requêtes.</li>
                         </ul>
+                        </p>
                     </div>
 
-                    <h4>3.2.7. Import de Données dans Elasticsearch</h4>
+                    <h4>3.2.6 Import de Données</h4>
                     <div class="question">
-                        <strong>Question :</strong> À quoi sert l'argument <code>--dryRun</code> dans la commande <code>mongorestore</code> ?
+                        <strong>Q :</strong> À quoi sert l'option <code>--dryRun</code> dans <code>mongorestore</code> ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            L'option <code>--dryRun</code> permet de :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Elle permet de :
                         <ul>
-                            <li>Simuler une restauration <strong>sans réellement importer les données</strong>.</li>
-                            <li>Vérifier que la commande est correcte et que les données peuvent être lues sans erreur.</li>
-                            <li>Estimer le temps et les ressources nécessaires pour la restauration réelle.</li>
+                            <li>Simuler une restauration <strong>sans importer les données</strong>.</li>
+                            <li>Vérifier que la commande est valide et que les données sont lisibles.</li>
+                            <li>Estimer le temps et les ressources nécessaires.</li>
                         </ul>
+                        </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> À quoi sert la commande <code>time</code> ? Pourquoi l'utiliser ici ?
+                        <strong>Q :</strong> Pourquoi utiliser <code>time</code> pour mesurer l'import des données ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La commande <code>time</code> mesure le temps d'exécution d'une commande. Elle est utile ici pour :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Pour :
                         <ul>
-                            <li>Évaluer les <strong>performances</strong> de l'import des données.</li>
+                            <li>Évaluer les <strong>performances</strong> de l'import.</li>
                             <li>Comparer différents scénarios (ex: avec/sans index).</li>
-                            <li>Identifier des <strong>goulots d'étranglement</strong> (ex: temps d'indexation élevé).</li>
+                            <li>Identifier des <strong>goulots d'étranglement</strong> (ex: temps d'indexation).</li>
                         </ul>
-                        <p>
-                            La sortie de <code>time</code> inclut :
                         </p>
+                        <p><strong>Sortie de <code>time</code></strong> :
                         <ul>
-                            <li><code>real</code> : Temps total écoulé (incluant l'attente des E/S).</li>
-                            <li><code>user</code> : Temps CPU passé en mode utilisateur.</li>
-                            <li><code>sys</code> : Temps CPU passé en mode noyau.</li>
+                            <li><code>real</code> : Temps total écoulé (inclut l'attente des E/S).</li>
+                            <li><code>user</code> : Temps CPU en mode utilisateur.</li>
+                            <li><code>sys</code> : Temps CPU en mode noyau.</li>
                         </ul>
+                        </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Pourquoi n'est-il pas possible de faire le tri côté client si le nombre de documents est important ?
+                        <strong>Q :</strong> Pourquoi ne pas faire le tri côté client pour de grands volumes de données ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            Pour de grands volumes de données, le tri côté client est impossible car :
-                        </p>
+                        <strong>R :</strong>
+                        <p>Car :
                         <ul>
-                            <li>Le client devrait <strong>télécharger tous les documents</strong> avant de pouvoir les trier, ce qui est inefficace et coûteux en bande passante.</li>
+                            <li>Le client devrait <strong>télécharger tous les documents</strong> avant de trier (coûteux en bande passante).</li>
                             <li>Les performances seraient <strong>dégradées</strong> par le transfert et le traitement local.</li>
-                            <li>Elasticsearch est optimisé pour effectuer des tris <strong>côté serveur</strong>, en utilisant des index et des algorithmes efficaces.</li>
+                            <li>Elasticsearch est optimisé pour le tri <strong>côté serveur</strong> (index, algorithmes efficaces).</li>
                         </ul>
+                        </p>
                     </div>
 
                     <div class="question">
-                        <strong>Question :</strong> Qu'est-ce que le principe de pagination pour Elasticsearch ?
+                        <strong>Q :</strong> Qu'est-ce que la pagination dans Elasticsearch ?
                     </div>
                     <div class="answer">
-                        <strong>Réponse :</strong>
-                        <p>
-                            La pagination permet de diviser les résultats d'une requête en plusieurs pages, afin de :
-                        </p>
+                        <strong>R :</strong>
+                        <p>La pagination divise les résultats en pages pour :
                         <ul>
-                            <li>Éviter de surcharger le client avec trop de données en une seule fois.</li>
-                            <li>Améliorer les <strong>performances</strong> et la <strong>réactivité</strong> de l'application.</li>
+                            <li>Éviter de surcharger le client avec trop de données.</li>
+                            <li>Améliorer les performances et la réactivité.</li>
                         </ul>
-                        <p>
-                            Elasticsearch utilise deux mécanismes principaux pour la pagination :
                         </p>
+                        <p><strong>Méthodes</strong> :
                         <ul>
-                            <li><strong><code>from</code> et <code>size</code></strong> :
+                            <li><code>from</code> et <code>size</code> :
                                 <ul>
-                                    <li><code>from</code> : Indice du premier document à retourner.</li>
+                                    <li><code>from</code> : Indice du premier document.</li>
                                     <li><code>size</code> : Nombre de documents par page.</li>
-                                    <li>Exemple : <code>{"from": 10, "size": 20}</code> retourne les documents 11 à 30.</li>
+                                    <li>Limite : <code>from + size</code> ≤ 10 000 par défaut.</li>
                                 </ul>
-                                <p>
-                                    <strong>Limite</strong> : Par défaut, Elasticsearch limite <code>from + size</code> à 10 000. Au-delà, il faut utiliser <code>search_after</code>.
-                                </p>
                             </li>
-                            <li><strong><code>search_after</code></strong> :
+                            <li><code>search_after</code> :
                                 <ul>
-                                    <li>Utilise le dernier document de la page précédente pour obtenir la page suivante.</li>
-                                    <li>Plus efficace pour les grands jeux de données, car il évite de recalculer les scores pour tous les documents.</li>
-                                    <li>Nécessite un champ de tri unique (comme <code>_id</code> ou un timestamp).</li>
+                                    <li>Utilise le dernier document de la page précédente pour obtenir la suivante.</li>
+                                    <li>Plus efficace pour les grands jeux de données.</li>
                                 </ul>
                             </li>
                         </ul>
+                        </p>
                     </div>
                 </div>
             </section>
         </section>
 
-        <hr>
-
-        <!-- Section Questions des TP -->
+        <!-- Réponses aux Questions des TP -->
         <section id="questions">
             <h2>4. Réponses aux Questions des TP</h2>
 
-            <h3>4.1. Questions Générales sur NoSQL</h3>
+            <h3>4.1 Questions Générales sur NoSQL</h3>
             <div class="question">
-                <strong>Question :</strong> Quels sont les avantages et inconvénients de BASE par rapport à ACID ?
+                <strong>Q :</strong> Quels sont les avantages et inconvénients de BASE par rapport à ACID ?
             </div>
             <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    <strong>Avantages de BASE :</strong>
-                </p>
+                <strong>R :</strong>
+                <p><strong>Avantages de BASE</strong> :
                 <ul>
-                    <li><strong>Scalabilité</strong> : Meilleure adaptation aux systèmes distribués et aux grands volumes de données.</li>
-                    <li><strong>Disponibilité</strong> : Priorité à la disponibilité même en cas de partition réseau.</li>
-                    <li><strong>Performance</strong> : Moins de surcharge liée aux transactions ACID.</li>
+                    <li><strong>Scalabilité</strong> : Adapté aux systèmes distribués et grands volumes.</li>
+                    <li><strong>Disponibilité</strong> : Priorité à la disponibilité même en cas de partition.</li>
+                    <li><strong>Performance</strong> : Moins de surcharge liée aux transactions.</li>
                 </ul>
-                <p>
-                    <strong>Inconvénients de BASE :</strong>
                 </p>
+                <p><strong>Inconvénients de BASE</strong> :
                 <ul>
                     <li><strong>Cohérence eventualle</strong> : Les données peuvent être temporairement incohérentes.</li>
                     <li><strong>Complexité applicative</strong> : L'application doit gérer les incohérences.</li>
-                    <li><strong>Pas de rollback</strong> : Difficile d'annuler une opération en cas d'erreur.</li>
+                    <li><strong>Pas de rollback</strong> : Difficile d'annuler une opération.</li>
                 </ul>
+                </p>
             </div>
 
             <div class="question">
-                <strong>Question :</strong> Quels sont les cas d'usage typiques pour NoSQL ?
+                <strong>Q :</strong> Quand utiliser NoSQL plutôt que SQL ?
             </div>
             <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    NoSQL est particulièrement adapté pour :
-                </p>
+                <strong>R :</strong>
+                <p><strong>Préférer NoSQL pour</strong> :
                 <ul>
-                    <li><strong>Big Data</strong> : Stockage et traitement de grands volumes de données non structurées.</li>
-                    <li><strong>Applications web modernes</strong> : Gestion de données JSON (ex: profils utilisateurs, sessions).</li>
-                    <li><strong>IoT</strong> : Collecte et analyse de données provenants de capteurs.</li>
-                    <li><strong>Logs et analytics</strong> : Stockage et analyse de logs (ex: avec ELK).</li>
-                    <li><strong>Applications nécessitant une scalabilité horizontale</strong> : Ex: réseaux sociaux, jeux en ligne.</li>
+                    <li>Données <strong>non structurées</strong> (JSON, logs).</li>
+                    <li>Besoin de <strong>scalabilité horizontale</strong> (millions d'utilisateurs).</li>
+                    <li><strong>Flexibilité du schéma</strong> (ajout/modification fréquente de champs).</li>
+                    <li><strong>Haute disponibilité</strong> (tolérance aux pannes).</li>
                 </ul>
+                </p>
+                <p><strong>Préférer SQL pour</strong> :
+                <ul>
+                    <li>Données <strong>fortement relationnelles</strong> (comptabilité, ERP).</li>
+                    <li>Besoin de <strong>transactions ACID</strong> (banques).</li>
+                    <li>Requêtes <strong>complexes avec jointures</strong>.</li>
+                </ul>
+                </p>
             </div>
 
-            <h3>4.2. Questions sur MongoDB</h3>
+            <h3>4.2 Questions sur MongoDB</h3>
             <div class="question">
-                <strong>Question :</strong> Pourquoi MongoDB utilise-t-il des documents JSON plutôt que des tables relationnelles ?
+                <strong>Q :</strong> Pourquoi MongoDB utilise-t-il des documents JSON plutôt que des tables relationnelles ?
             </div>
             <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    MongoDB utilise des documents JSON pour :
-                </p>
+                <strong>R :</strong>
+                <p>Pour :
                 <ul>
-                    <li><strong>Flexibilité</strong> : Pas de schéma fixe, les champs peuvent varier d'un document à l'autre.</li>
-                    <li><strong>Correspondance naturelle avec les objets applicatifs</strong> : Les données sont souvent déjà sous forme JSON dans les applications modernes.</li>
-                    <li><strong>Performance</strong> : Moins de jointures nécessaires (les données liées sont souvent embarquées dans le même document).</li>
-                    <li><strong>Scalabilité</strong> : Les documents sont plus faciles à répartir sur plusieurs nœuds (sharding).</li>
+                    <li><strong>Flexibilité</strong> : Pas de schéma fixe, champs variables entre documents.</li>
+                    <li><strong>Correspondance naturelle</strong> avec les objets applicatifs (JSON).</li>
+                    <li><strong>Performance</strong> : Moins de jointures (données liées embarquées).</li>
+                    <li><strong>Scalabilité</strong> : Documents faciles à répartir (sharding).</li>
                 </ul>
-            </div>
-
-            <div class="question">
-                <strong>Question :</strong> Qu'est-ce qu'un replica set dans MongoDB ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Un <strong>replica set</strong> est un groupe de serveurs MongoDB qui maintiennent les mêmes données, offrant :
                 </p>
-                <ul>
-                    <li><strong>Haute disponibilité</strong> : Si le nœud primaire tombe en panne, un secondaire est élu comme nouveau primaire.</li>
-                    <li><strong>Tolérance aux pannes</strong> : Les données sont répliquées sur plusieurs nœuds.</li>
-                    <li><strong>Lecture scalable</strong> : Les requêtes de lecture peuvent être réparties sur les nœuds secondaires.</li>
-                </ul>
-                <p>
-                    Un replica set est composé de :
-                </p>
-                <ul>
-                    <li>Un <strong>nœud primaire</strong> (reçoit les écritures).</li>
-                    <li>Un ou plusieurs <strong>nœuds secondaires</strong> (répliquent les données).</li>
-                    <li>Éventuellement un <strong>arbitre</strong> (participe aux élections sans stocker de données).</li>
-                </ul>
             </div>
 
             <div class="question">
-                <strong>Question :</strong> Qu'est-ce que le sharding dans MongoDB ?
+                <strong>Q :</strong> Comment choisir une clé de sharding dans MongoDB ?
             </div>
             <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Le <strong>sharding</strong> est une technique de partitionnement horizontal qui permet de :
-                </p>
+                <strong>R :</strong>
+                <p><strong>Critères</strong> :
                 <ul>
-                    <li>Répartir les données d'une collection sur plusieurs machines (<strong>shards</strong>).</li>
-                    <li>Améliorer les <strong>performances</strong> en parallélisant les requêtes.</li>
-                    <li>Augmenter la <strong>capacité de stockage</strong> en ajoutant des shards.</li>
+                    <li><strong>Cardinalité élevée</strong> : Beaucoup de valeurs distinctes pour éviter les "hotspots".</li>
+                    <li><strong>Distribution uniforme</strong> : Répartition équilibrée des requêtes.</li>
+                    <li><strong>Stabilité</strong> : Clé qui ne change pas fréquemment.</li>
+                    <li><strong>Fréquence d'usage</strong> : Clé souvent utilisée dans les requêtes.</li>
                 </ul>
-                <p>
-                    Composants clés :
                 </p>
+                <p><strong>Stratégies</strong> :
                 <ul>
-                    <li><strong>Shards</strong> : Stockent une partie des données.</li>
-                    <li><strong>Config servers</strong> : Stockent les métadonnées du cluster.</li>
-                    <li><strong>Mongos</strong> : Routeur qui achemine les requêtes vers les shards appropriés.</li>
+                    <li><strong>Hachage</strong> : Bonne distribution, moins efficace pour les requêtes par plage.</li>
+                    <li><strong>Plage</strong> : Efficace pour les plages, mais peut déséquilibrer les shards.</li>
+                    <li><strong>Clé composée</strong> : Combine plusieurs champs.</li>
                 </ul>
+                </p>
+            </div>
+
+            <h3>4.3 Questions sur la Stack ELK</h3>
+            <div class="question">
+                <strong>Q :</strong> Quelles sont les différences entre Logstash et Beats ?
+            </div>
+            <div class="answer">
+                <strong>R :</strong>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Logstash</th>
+                            <th>Beats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Type</td>
+                            <td>Outil ETL lourd (JVM)</td>
+                            <td>Agents légers (Go)</td>
+                        </tr>
+                        <tr>
+                            <td>Fonctionnalités</td>
+                            <td>Transformations complexes (filtrage, parsing)</td>
+                            <td>Collecte simple (logs, métriques)</td>
+                        </tr>
+                        <tr>
+                            <td>Ressources</td>
+                            <td>Gourmand en mémoire/CPU</td>
+                            <td>Léger, adapté aux environnements embarqués</td>
+                        </tr>
+                        <tr>
+                            <td>Cas d'usage</td>
+                            <td>Pipelines avancés (agrégation de sources multiples)</td>
+                            <td>Collecte distribuée (ex: Filebeat sur chaque serveur)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Complémentarité</strong> : Les Beats collectent les données et les envoient à Logstash pour traitement, ou directement à Elasticsearch.</p>
             </div>
 
             <div class="question">
-                <strong>Question :</strong> Comment choisir une clé de sharding dans MongoDB ?
+                <strong>Q :</strong> Comment optimiser Elasticsearch pour les performances ?
             </div>
             <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Le choix de la clé de sharding est crucial pour les performances. Voici les critères à considérer :
-                </p>
-                <ul>
-                    <li><strong>Cardinalité élevée</strong> : La clé doit avoir beaucoup de valeurs distinctes pour éviter les "hotspots".</li>
-                    <li><strong>Distribution uniforme</strong> : Les requêtes doivent être réparties équitablement entre les shards.</li>
-                    <li><strong>Stabilité</strong> : La clé ne doit pas changer fréquemment (pour éviter les migrations de chunks).</li>
-                    <li><strong>Fréquence d'utilisation</strong> : La clé doit être souvent utilisée dans les requêtes.</li>
-                </ul>
-                <p>
-                    Stratégies courantes :
-                </p>
-                <ul>
-                    <li><strong>Hachage</strong> : Bonne distribution, mais moins efficace pour les requêtes par plage.</li>
-                    <li><strong>Plage</strong> : Efficace pour les requêtes par plage, mais peut entraîner des déséquilibres.</li>
-                    <li><strong>Clé composée</strong> : Combine plusieurs champs pour optimiser la distribution et les requêtes.</li>
-                </ul>
-            </div>
-
-            <h3>4.3. Questions sur la Stack ELK</h3>
-            <div class="question">
-                <strong>Question :</strong> Quelles sont les différences entre Logstash et Beats ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    <strong>Logstash</strong> :
-                </p>
-                <ul>
-                    <li>Outil <strong>lourd</strong> avec une JVM.</li>
-                    <li>Supporte des <strong>transformations complexes</strong> (filtrage, parsing, enrichissement).</li>
-                    <li>Utilisé pour des <strong>pipelines avancés</strong> (ex: agrégation de multiples sources).</li>
-                </ul>
-                <p>
-                    <strong>Beats</strong> :
-                </p>
-                <ul>
-                    <li>Agents <strong>légers</strong> écrits en Go.</li>
-                    <li>Spécialisés pour des <strong>tâches simples</strong> (ex: collecte de logs avec Filebeat).</li>
-                    <li>Moins gourmands en ressources, idéaux pour les <strong>environnements embarqués</strong>.</li>
-                </ul>
-                <p>
-                    <strong>Complémentarité</strong> :
-                </p>
-                <ul>
-                    <li>Les Beats collectent les données et les envoient à Logstash pour traitement, ou directement à Elasticsearch.</li>
-                    <li>Logstash est utilisé lorsque des transformations complexes sont nécessaires.</li>
-                </ul>
-            </div>
-
-            <div class="question">
-                <strong>Question :</strong> Comment Elasticsearch gère-t-il la réplication et la tolérance aux pannes ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Elasticsearch utilise les mécanismes suivants :
-                </p>
-                <ul>
-                    <li><strong>Réplication</strong> :
-                        <ul>
-                            <li>Chaque index est divisé en <strong>shards</strong> (partitions).</li>
-                            <li>Chaque shard peut avoir une ou plusieurs <strong>répliques</strong>.</li>
-                            <li>Les répliques sont stockées sur différents nœuds pour la redondance.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Tolérance aux pannes</strong> :
-                        <ul>
-                            <li>Si un nœud tombe en panne, ses shards primaires sont <strong>promus</strong> depuis les répliques.</li>
-                            <li>Le cluster reste disponible tant qu'il y a suffisamment de répliques.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Détection des pannes</strong> :
-                        <ul>
-                            <li>Les nœuds s'envoient régulièrement des <strong>heartbeats</strong>.</li>
-                            <li>Un nœud est considéré comme défaillant après un timeout.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="question">
-                <strong>Question :</strong> Quels sont les avantages de Kibana pour la visualisation des données ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Kibana offre plusieurs avantages pour la visualisation :
-                </p>
-                <ul>
-                    <li><strong>Interface intuitive</strong> : Permet de créer des dashboards sans coder.</li>
-                    <li><strong>Intégration native avec Elasticsearch</strong> : Accès direct aux données indexées.</li>
-                    <li><strong>Visualisations variées</strong> : Graphiques, cartes, tables, métriques, etc.</li>
-                    <li><strong>Partage et collaboration</strong> : Possibilité de partager des dashboards et des requêtes.</li>
-                    <li><strong>Exploration interactive</strong> : Filtrage et drill-down sur les données.</li>
-                    <li><strong>Alerting</strong> : Création d'alertes basées sur des seuils ou des patterns.</li>
-                </ul>
-            </div>
-
-            <h3>4.4. Questions sur les Performances et l'Optimisation</h3>
-            <div class="question">
-                <strong>Question :</strong> Comment optimiser les performances d'Elasticsearch ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Plusieurs stratégies permettent d'optimiser Elasticsearch :
-                </p>
+                <strong>R :</strong>
+                <p><strong>Stratégies</strong> :
                 <ul>
                     <li><strong>Index et mappings</strong> :
                         <ul>
-                            <li>Définir des <strong>mappings explicites</strong> pour éviter le mapping dynamique.</li>
-                            <li>Utiliser des <strong>types de champs adaptés</strong> (ex: <code>keyword</code> pour les champs triables).</li>
+                            <li>Définir des mappings explicites (éviter le mapping dynamique).</li>
+                            <li>Utiliser des types de champs adaptés (ex: <code>keyword</code> pour les champs triables).</li>
                         </ul>
                     </li>
                     <li><strong>Sharding</strong> :
                         <ul>
-                            <li>Choisir un nombre de shards adapté à la taille des données et au matériel.</li>
+                            <li>Choisir un nombre de shards adapté à la taille des données.</li>
                             <li>Éviter les shards trop petits ou trop grands.</li>
                         </ul>
                     </li>
                     <li><strong>Réplication</strong> :
                         <ul>
-                            <li>Ajuster le nombre de répliques en fonction des besoins en disponibilité et en performance de lecture.</li>
+                            <li>Ajuster le nombre de répliques selon les besoins en disponibilité.</li>
                         </ul>
                     </li>
                     <li><strong>Matériel</strong> :
                         <ul>
-                            <li>Allouer suffisamment de <strong>RAM</strong> (pour la heap JVM et le cache du système de fichiers).</li>
-                            <li>Utiliser des <strong>disques SSD</strong> pour les performances d'E/S.</li>
+                            <li>Allouer suffisamment de RAM (heap JVM + cache système).</li>
+                            <li>Utiliser des disques SSD pour les performances d'E/S.</li>
                         </ul>
                     </li>
                     <li><strong>Requêtes</strong> :
                         <ul>
-                            <li>Utiliser des <strong>filtres</strong> plutôt que des requêtes pour les critères booléens.</li>
-                            <li>Limiter le nombre de résultats avec <code>size</code> et utiliser la pagination.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Configuration JVM</strong> :
-                        <ul>
-                            <li>Ne pas dépasser 50% de la RAM totale pour la heap JVM (pour laisser de la place au cache du système de fichiers).</li>
-                            <li>Éviter les tailles de heap supérieures à 32 Go (pour éviter les pauses longues du garbage collector).</li>
+                            <li>Privilégier les filtres (<code>filter</code>) aux requêtes (<code>query</code>) pour les critères booléens.</li>
+                            <li>Limiter le nombre de résultats avec <code>size</code>.</li>
                         </ul>
                     </li>
                 </ul>
-            </div>
-
-            <div class="question">
-                <strong>Question :</strong> Quelles sont les bonnes pratiques pour la gestion des logs avec ELK ?
-            </div>
-            <div class="answer">
-                <strong>Réponse :</strong>
-                <p>
-                    Voici quelques bonnes pratiques pour gérer les logs avec ELK :
                 </p>
-                <ul>
-                    <li><strong>Normalisation des logs</strong> :
-                        <ul>
-                            <li>Utiliser des formats standardisés (ex: JSON, syslog).</li>
-                            <li>Appliquer des <strong>parsers</strong> (comme Grok dans Logstash) pour extraire des champs structurés.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Filtrage et enrichissement</strong> :
-                        <ul>
-                            <li>Filtrer les logs non pertinents dès la collecte (ex: avec Filebeat).</li>
-                            <li>Enrichir les logs avec des métadonnées (ex: géolocalisation, informations sur l'hôte).</li>
-                        </ul>
-                    </li>
-                    <li><strong>Indexation</strong> :
-                        <ul>
-                            <li>Utiliser des <strong>index patterns</strong> basés sur la date (ex: <code>logs-2023-*-*</code>).</li>
-                            <li>Configurer des <strong>politiques de rétention</strong> (ILM) pour gérer la rotation des index.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Visualisation</strong> :
-                        <ul>
-                            <li>Créer des dashboards pour surveiller les <strong>métriques clés</strong> (erreurs, temps de réponse, etc.).</li>
-                            <li>Configurer des <strong>alertes</strong> pour les anomalies.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Sécurité</strong> :
-                        <ul>
-                            <li>Activer l'<strong>authentification</strong> et le <strong>chiffrement</strong> (TLS).</li>
-                            <li>Restreindre les accès avec des <strong>rôles</strong> (RBAC).</li>
-                        </ul>
-                    </li>
-                    <li><strong>Performance</strong> :
-                        <ul>
-                            <li>Optimiser les requêtes avec des <strong>agrégations</strong> et des <strong>filtres</strong>.</li>
-                            <li>Utiliser des <strong>index dédiés</strong> pour les logs fréquents (ex: logs Apache dans un index séparé).</li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </section>
 
-        <hr>
-
-        <h2>5. Conclusion</h2>
-        <p>
-            Ce cours a couvert les fondamentaux de NoSQL, MongoDB et la stack ELK, ainsi que leurs applications pratiques à travers des TP. Voici les points clés à retenir :
-        </p>
-        <ul>
-            <li><strong>NoSQL</strong> offre une alternative flexible et scalable aux bases de données relationnelles, particulièrement adaptée aux grands volumes de données non structurées.</li>
-            <li><strong>MongoDB</strong> est une base de données NoSQL populaire, basée sur des documents JSON, avec des fonctionnalités avancées comme la réplication et le sharding.</li>
-            <li><strong>La stack ELK</strong> (Elasticsearch, Logstash, Kibana) est une solution puissante pour la collecte, le traitement, l'indexation et la visualisation de données, notamment pour l'analyse de logs.</li>
-            <li><strong>Les TP</strong> ont permis de mettre en pratique ces concepts, depuis l'installation et la configuration jusqu'à l'analyse et la visualisation des données.</li>
-        </ul>
-        <p>
-            Pour aller plus loin, explorez les documentations officielles :
-        </p>
-        <ul>
-            <li><a href="https://www.mongodb.com/docs/" target="_blank">Documentation MongoDB</a></li>
-            <li><a href="https://www.elastic.co/guide/index.html" target="_blank">Documentation Elastic</a></li>
-        </ul>
+        <!-- Conclusion -->
+        <section>
+            <h2>5. Conclusion et Ressources</h2>
+            <p>
+                Ce cours a couvert les fondamentaux de <strong>NoSQL</strong>, <strong>MongoDB</strong> et la <strong>stack ELK</strong>, ainsi que leurs applications pratiques via des TP. Voici les points clés à retenir :
+            </p>
+            <ul>
+                <li><strong>NoSQL</strong> : Alternative flexible et scalable aux bases relationnelles, idéale pour les données non structurées et les grands volumes.</li>
+                <li><strong>MongoDB</strong> : Base de données orientée documents, avec réplication, sharding et requêtes riches.</li>
+                <li><strong>Stack ELK</strong> : Solution complète pour la collecte, le traitement et la visualisation de données (logs, métriques, etc.).</li>
+                <li><strong>TP</strong> : Mise en pratique des concepts, de l'installation à l'analyse des données.</li>
+            </ul>
+            <p><strong>Pour aller plus loin</strong> :</p>
+            <ul>
+                <li><a href="https://www.mongodb.com/docs/" target="_blank">Documentation MongoDB</a></li>
+                <li><a href="https://www.elastic.co/guide/index.html" target="_blank">Documentation Elastic</a></li>
+                <li><a href="https://nosql-database.org/" target="_blank">Comparatif des bases NoSQL</a></li>
+            </ul>
+            <div class="important">
+                <p><strong>Bonnes pratiques</strong> :
+                <ul>
+                    <li>Pour <strong>MongoDB</strong> :
+                        <ul>
+                            <li>Utiliser des index judicieusement (éviter les index inutiles).</li>
+                            <li>Monitorer les performances avec <code>mongostat</code> et <code>mongotop</code>.</li>
+                            <li>Sauvegarder régulièrement les données (<code>mongodump</code>).</li>
+                        </ul>
+                    </li>
+                    <li>Pour <strong>ELK</strong> :
+                        <ul>
+                            <li>Configurer des <strong>politiques de rétention</strong> (ILM) pour gérer la croissance des index.</li>
+                            <li>Utiliser des <strong>filtres Grok</strong> dans Logstash pour parser les logs.</li>
+                            <li>Sécuriser l'accès à Kibana et Elasticsearch (TLS, authentification).</li>
+                        </ul>
+                    </li>
+                </ul>
+                </p>
+            </div>
+            <a href="#toc" class="back-to-top">↑ Retour à la table des matières</a>
+        </section>
     </div>
 </body>
 </html>
